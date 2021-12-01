@@ -1,16 +1,21 @@
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import rootReducer from './reducer';
-import { sayHiOnDispatch } from './exampleAddons/enhancers';
+import {
+	sayHiOnDispatch,
+	includeMeaningOfLife,
+} from './exampleAddons/enhancers';
 
-let preloadedState;
-const persistedTodosString = localStorage.getItem('todos');
+// let preloadedState;
+// const persistedTodosString = localStorage.getItem('todos');
 
-if (persistedTodosString) {
-	preloadedState = {
-		todos: JSON.parse(persistedTodosString),
-	};
-}
+// if (persistedTodosString) {
+// 	preloadedState = {
+// 		todos: JSON.parse(persistedTodosString),
+// 	};
+// }
 
-const store = createStore(rootReducer, preloadedState, sayHiOnDispatch);
+const composedEnhancer = compose(sayHiOnDispatch, includeMeaningOfLife);
+
+const store = createStore(rootReducer, composedEnhancer);
 
 export default store;
