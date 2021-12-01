@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export const print1 = (storeAPI) => (next) => (action) => {
   console.log('1')
   return next(action)

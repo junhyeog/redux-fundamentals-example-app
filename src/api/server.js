@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+/* eslint-disable no-param-reassign */
 /* eslint-disable no-unused-vars */
 
 import { Server, Model, Factory, hasMany, RestSerializer } from 'miragejs'
@@ -60,7 +62,7 @@ const generateTodoText = () => {
 new Server({
   routes() {
     this.namespace = 'fakeApi'
-    //this.timing = 2000
+    // this.timing = 2000
 
     this.resource('todos')
     this.resource('lists')
