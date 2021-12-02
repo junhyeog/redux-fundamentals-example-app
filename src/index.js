@@ -8,15 +8,11 @@ import './api/server';
 
 import store from './store';
 
-store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' });
-// log: 'Hi!'
-
-console.log('State after dispatch: ', store.getState());
-// log: {todos: [...], filters: {status, colors}, meaningOfLife: 42}
-
 ReactDOM.render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
+	<React.StrictMode>
+		<Provider store={store}>
+			<App />
+		</Provider>
+	</React.StrictMode>,
 	document.getElementById('root')
 );
