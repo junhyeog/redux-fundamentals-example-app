@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+import { client } from '../../api/client';
 /* eslint-disable no-shadow */
 const initialState = [];
 
@@ -55,7 +57,24 @@ export default function todosReducer(state = initialState, action) {
 		case 'todos/completedCleared': {
 			return state.filter((todo) => !todo.completed);
 		}
+		case 'todos/todosLoaded': {
+			// Replace the existing state entirely by returning the new value
+			return action.payload;
+		}
 		default:
 			return state;
 	}
+}
+
+// Thunk function
+export async function fetchTodos(dispatch, getState) {
+	const response = await client.get('/fakeApi/todos');
+
+	const stateBefore = getState();
+	console.log('Todos before dispatch: ', stateBefore.todos.length);
+
+	dispatch({ type: 'todos/todosLoaded', payload: response.todos });
+
+	const stateAfter = getState();
+	console.log('Todos after dispatch: ', stateAfter.todos.length);
 }
